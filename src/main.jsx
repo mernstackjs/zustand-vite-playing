@@ -1,0 +1,15 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router";
+import TodosProvider from "./util/todosContext.jsx";
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <TodosProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </TodosProvider>
+  </StrictMode>,
+);

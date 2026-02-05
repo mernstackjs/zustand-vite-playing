@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 export default function AddTodos() {
   const [status, setStatus] = useState("middle");
 
-  const { addTodos } = UseTodos();
+  const { addTodos, user } = UseTodos();
 
   const navigate = useNavigate();
 
@@ -20,9 +20,14 @@ export default function AddTodos() {
       title,
       desc,
       status,
+      isComplated: false,
+      owner: {
+        id: user.uid,
+        email: user.email,
+      },
     };
     addTodos(todo);
-    navigate("/");
+    navigate("/todos");
 
     e.target.reset();
 

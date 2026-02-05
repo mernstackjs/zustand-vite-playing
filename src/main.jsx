@@ -6,10 +6,10 @@ import { BrowserRouter } from "react-router";
 import TodosProvider from "./util/todosContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <TodosProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <TodosProvider>
         <App />
-      </BrowserRouter>
-    </TodosProvider>
+      </TodosProvider>
+    </BrowserRouter>
   </StrictMode>,
 );

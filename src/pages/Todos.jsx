@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { UseTodos } from "../util/todosContext";
 
 export default function Todos() {
-  const { todos, todoDelete } = UseTodos();
+  const { todos, todoDelete, user } = UseTodos();
+  console.log(todos, user);
   const [tab, setTab] = useState("All");
-  const todosFiltered = todos.filter((t) =>
-    tab === "All" ? true : t.status === tab.toLowerCase(),
-  );
+  const todosFiltered = todos.filter((t) => {
+    const isOwner = t.owner.id === user?.uid;
+
+    if (!isOwner) return false;
+
+    if (tab === "All") return true;
+
+    return t.status === tab.toLowerCase();
+  });
 
   const handleDelete = (id) => {
     todoDelete(id);

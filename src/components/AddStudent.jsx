@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function AddStudent({ setStudents }) {
+export default function AddStudent({ setStudents, students }) {
   const handleAddNewStudent = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -15,6 +15,10 @@ export default function AddStudent({ setStudents }) {
 
     e.target.reset();
   };
+
+  useEffect(() => {
+    localStorage.setItem("students_data", JSON.stringify(students));
+  }, [students]);
   return (
     <div className="border p-3 rounded-2xl">
       <form onSubmit={handleAddNewStudent}>

@@ -1,7 +1,10 @@
 import React from "react";
+import { useStudentStore } from "../store/studentStore";
 
-export default function StudentsList({ students, deleteStudent }) {
-  console.log(students);
+export default function StudentsList() {
+  const students = useStudentStore((state) => state.students);
+  const delStudent = useStudentStore((state) => state.delStudent);
+
   return (
     <div className="col-span-2 border rounded-2xl p-3">
       <ul className="grid md:grid-cols-3 gap-2">
@@ -16,7 +19,7 @@ export default function StudentsList({ students, deleteStudent }) {
                 Class: {student.student_class}
               </p>
               <button
-                onClick={() => deleteStudent(student.rolNum)}
+                onClick={() => delStudent(student.rolNum)}
                 className="text-red-800 underline italic mt-2"
               >
                 Delete

@@ -1,4 +1,3 @@
-import React from "react";
 import { useCounterStore } from "../store/useConterStore";
 
 export default function Counter() {

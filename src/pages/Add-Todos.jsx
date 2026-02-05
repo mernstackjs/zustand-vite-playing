@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { UseTodos } from "../util/todosContext";
+import { useState } from "react";
+
 import { useNavigate } from "react-router";
+import { useTodoStore } from "../store/todoStore";
+import { useAuthStore } from "../store/authStore";
 
 export default function AddTodos() {
   const [status, setStatus] = useState("middle");
 
-  const { addTodos, user } = UseTodos();
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const user = useAuthStore((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -26,7 +29,7 @@ export default function AddTodos() {
         email: user.email,
       },
     };
-    addTodos(todo);
+    addTodo(todo);
     navigate("/todos");
 
     e.target.reset();

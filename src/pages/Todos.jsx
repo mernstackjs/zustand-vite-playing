@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { UseTodos } from "../util/todosContext";
+import { useState } from "react";
+
+import { useAuthStore } from "../store/authStore";
+import { useTodoStore } from "../store/todoStore";
 
 export default function Todos() {
-  const { todos, todoDelete, user } = UseTodos();
-  console.log(todos, user);
+  const user = useAuthStore((state) => state.user);
+  const todos = useTodoStore((state) => state.todos);
+  const deleteTodo = useTodoStore((state) => state.deleteTodo);
+
   const [tab, setTab] = useState("All");
   const todosFiltered = todos.filter((t) => {
     const isOwner = t.owner.id === user?.uid;
@@ -16,7 +20,7 @@ export default function Todos() {
   });
 
   const handleDelete = (id) => {
-    todoDelete(id);
+    deleteTodo(id);
   };
 
   return (

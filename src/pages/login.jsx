@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { UseTodos } from "../util/todosContext";
+import { useState } from "react";
+
+import { useNavigate } from "react-router";
+import { useAuthStore } from "../store/authStore";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const { logIn } = UseTodos();
+  const logIn = useAuthStore((state) => state.logIn);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    logIn(email, password);
+    const success = logIn(email, password);
+    if (success) return navigate("/todos");
   };
 
   return (

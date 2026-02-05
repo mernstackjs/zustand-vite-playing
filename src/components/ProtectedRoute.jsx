@@ -1,9 +1,10 @@
-import React from "react";
 import { Link, Navigate, Outlet } from "react-router";
-import { UseTodos } from "../util/todosContext";
+
+import { useAuthStore } from "../store/authStore";
 
 export default function ProtectedRoute() {
-  const { logOut, user } = UseTodos();
+  const user = useAuthStore((state) => state.user);
+  const logOut = useAuthStore((state) => state.logOut);
 
   if (!user?.isLoggedIn) return <Navigate to="/login" />;
   return (

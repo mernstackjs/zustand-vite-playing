@@ -4,11 +4,11 @@ import AddTodos from "./pages/Add-Todos";
 import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/login";
-import { UseTodos } from "./util/todosContext";
 import Counter from "./pages/counter";
+import { useAuthStore } from "./store/authStore";
 
 export default function App() {
-  const { user } = UseTodos();
+  const user = useAuthStore((state) => state.user);
 
   return (
     <div className="p-12">

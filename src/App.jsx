@@ -8,6 +8,7 @@ import Counter from "./pages/counter";
 import { useAuthStore } from "./store/authStore";
 import Students from "./pages/students";
 import School from "./pages/School";
+import Tasks from "./pages/Tasks";
 
 export default function App() {
   const user = useAuthStore((state) => state.user);
@@ -18,12 +19,14 @@ export default function App() {
         <Link to={"/counter"}>Counter</Link>
         <Link to={"/students"}>Students</Link>
         <Link to={"/school"}>Schools</Link>
+        <Link to={"/tasks"}>Tasks</Link>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/students" element={<Students />} />
         <Route path="/school" element={<School />} />
+        <Route path="/tasks" element={<Tasks />} />
         <Route
           path="/login"
           element={!user?.isLoggedIn ? <Login /> : <Navigate to="/todos" />}

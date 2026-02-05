@@ -1,16 +1,24 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export const useStudentStore = create((set, get) => ({
-  students: JSON.parse(localStorage.getItem("students_data")) || [],
+export const useStudentStore = create(
+  persist(
+    (set) => ({
+      students: [],
 
-  addStudent: (data) => {
-    const newStudent = [...get().students, data];
-    localStorage.setItem("students_data", JSON.stringify(newStudent));
-    set({ students: newStudent });
-  },
-  delStudent: (rolNum) => {
-    const newStudent = get().students.filter((s) => s.rolNum !== rolNum);
-    localStorage.setItem("students_data", JSON.stringify(newStudent));
-    set({ students: newStudent });
-  },
-}));
+      addStudent: (data) => {
+        set((state) => ({
+          students: [...state.students, data],
+        }));
+      },
+      delStudent: (rolNum) => {
+        set((state) => ({
+          students: state.students.filter((s) => s.rolNum !== rolNum),
+        }));
+      },
+    }),
+    {
+      name: "students_data",
+    },
+  ),
+);

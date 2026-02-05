@@ -7,6 +7,7 @@ import Login from "./pages/login";
 import Counter from "./pages/counter";
 import { useAuthStore } from "./store/authStore";
 import Students from "./pages/students";
+import School from "./pages/School";
 
 export default function App() {
   const user = useAuthStore((state) => state.user);
@@ -16,11 +17,13 @@ export default function App() {
       <header className="flex gap-3 my-2">
         <Link to={"/counter"}>Counter</Link>
         <Link to={"/students"}>Students</Link>
+        <Link to={"/school"}>Schools</Link>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/students" element={<Students />} />
+        <Route path="/school" element={<School />} />
         <Route
           path="/login"
           element={!user?.isLoggedIn ? <Login /> : <Navigate to="/todos" />}
